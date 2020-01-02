@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ganesh_hs</string>
+    <string name="tenth_char">10th char</string>
+    <string name="word_count">Word count</string>
+    <string name="every_tenth_char">Every tenth char in the Blog</string>
+    <string name="white_space">WHITE_SPACE</string>
+    <string name="tenth_char_error">Failed to get 10th char</string>
+    <string name="word_count_error">Failed to find Word count</string>
+    <string name="every_tenth_char_error">Failed to every tenth char in the blog</string>
+    <string name="failed_to_load">Failed to load</string>
+    <string name="a_network_problem_interrupted_this_action">A network problem interrupted this action.</string>
+    <string name="retry">Retry</string>
+</resources>

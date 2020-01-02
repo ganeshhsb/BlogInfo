@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/app_padding"
+    android:paddingEnd="@dimen/app_padding"
+    android:background="@color/backgroundColor"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:focusable="true">
+
+    <TextView
+        android:id="@+id/network_error_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/network_error_description"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/title_margin_bottom"
+        android:text="@string/failed_to_load"
+        android:textColor="@color/grey260"
+        android:textSize="@dimen/text_size_large" />
+
+    <TextView
+        android:id="@+id/network_error_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/description_margin_bottom"
+        android:text="@string/a_network_problem_interrupted_this_action"
+        android:textAlignment="center"
+        android:textColor="@color/grey410"
+        android:textSize="@dimen/text_size_medium" />
+
+    <Button
+        android:id="@+id/error_screen_action_button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/network_error_description"
+        android:layout_centerHorizontal="true"
+        android:text="@string/retry"
+        android:visibility="gone" />
+
+</RelativeLayout>
