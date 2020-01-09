@@ -49,11 +49,7 @@ class BlogFragmentViewModelTest: AutoCloseKoinTest() {
     private lateinit var candidateUnderTest: BlogFragmentViewModel
     @Before
     fun setUp() {
-        val testTaskModule = module {
-            single { task } bind IBlogTask::class
-        }
-        startKoin { modules(testTaskModule) }
-        candidateUnderTest = BlogFragmentViewModel()
+        candidateUnderTest = BlogFragmentViewModel(task)
         candidateUnderTest.blog10thCharLiveData.observeForever(blog10thCharLiveDataObserver)
         candidateUnderTest.blogEvery10thCharLiveData.observeForever(blogEvery10thCharLiveDataObserver)
         candidateUnderTest.blogWordCount.observeForever(blogWordCountObserver)

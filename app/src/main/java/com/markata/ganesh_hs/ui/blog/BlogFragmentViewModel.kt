@@ -14,8 +14,9 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import javax.inject.Inject
 
-class BlogFragmentViewModel : ViewModel(), KoinComponent {
+class BlogFragmentViewModel @Inject constructor(private val blogTask: BlogTask) : ViewModel(), KoinComponent {
     private var _blog10thCharLiveData: MutableLiveData<Result<Char>> = MutableLiveData()
     private var _blogEvery10thCharLiveData: MutableLiveData<Result<String>> = MutableLiveData()
     private var _blogWordCount: MutableLiveData<Result<Int>> = MutableLiveData()
@@ -23,8 +24,6 @@ class BlogFragmentViewModel : ViewModel(), KoinComponent {
     val blog10thCharLiveData: LiveData<Result<Char>> = _blog10thCharLiveData
     val blogEvery10thCharLiveData: LiveData<Result<String>> = _blogEvery10thCharLiveData
     val blogWordCount: LiveData<Result<Int>> = _blogWordCount
-
-    private val blogTask: IBlogTask by inject()
 
     fun get10thCharacterInBlog(): LiveData<Result<Char>> {
         EspressoIdlingResource.increment()

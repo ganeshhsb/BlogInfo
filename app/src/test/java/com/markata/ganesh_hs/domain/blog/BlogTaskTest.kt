@@ -31,11 +31,7 @@ class BlogTaskTest : AutoCloseKoinTest() {
     private lateinit var candidateUnderTest: IBlogTask
     @Before
     fun setUp() {
-        val testTaskModule = module {
-            single { repo } bind IBlogRepository::class
-        }
-        startKoin { modules(testTaskModule) }
-        candidateUnderTest = BlogTask()
+        candidateUnderTest = BlogTask(repo)
     }
 
     @After

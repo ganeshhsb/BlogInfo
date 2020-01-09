@@ -31,12 +31,7 @@ class BlogRepositoryTest : AutoCloseKoinTest() {
     private lateinit var candidateUnderTest: BlogRepository
     @Before
     fun setUp() {
-        val testRepoModule = module {
-            single { restfulAPIClient }
-        }
-        startKoin { modules(testRepoModule) }
-
-        candidateUnderTest = BlogRepository()
+        candidateUnderTest = BlogRepository(restfulAPIClient)
     }
 
     @After

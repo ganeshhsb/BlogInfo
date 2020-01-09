@@ -8,9 +8,9 @@ import com.markata.ganesh_hs.ui.blog.BlogFragmentViewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val activityModule = module {
-    single { BlogFragmentViewModel() }
-    single { BlogTask() } bind IBlogTask::class
-    single { BlogRepository() } bind IBlogRepository::class
-}
+//val activityModule = module {
+//    single { BlogFragmentViewModel() }
+//    single { BlogTask() } bind IBlogTask::class
+//    single { BlogRepository() } bind IBlogRepository::class
+//}
 
