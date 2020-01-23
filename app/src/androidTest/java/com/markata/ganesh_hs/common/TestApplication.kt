@@ -1,40 +1,26 @@
 package com.markata.ganesh_hs.common
 
-import android.app.Application
 import android.content.Context
-import com.markata.ganesh_hs.data.blog.repo.Blog
-import com.markata.ganesh_hs.data.blog.repo.IBlogRepository
-import com.markata.ganesh_hs.di.dagger.DaggerAppComponent
-import io.reactivex.Single
+import com.markata.ganesh_hs.ui.blog.di.DaggerTestAppComponent
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 
-val onlineNetworkChecker = module {
-    single {
-        object : INetworkChecker {
-            override fun isDeviceOnline(context: Context?): Boolean {
-                return true
-            }
-
-        }
-    } bind INetworkChecker::class
+val onlineNetworkChecker = object : INetworkChecker {
+    override fun isDeviceOnline(context: Context?): Boolean {
+        return true
+    }
 }
 
-val offlineNetworkChecker = module {
-    single {
-        object : INetworkChecker {
-            override fun isDeviceOnline(context: Context?): Boolean {
-                return false
-            }
-
-        }
-    } bind INetworkChecker::class
+val offlineNetworkChecker = object : INetworkChecker {
+    override fun isDeviceOnline(context: Context?): Boolean {
+        return false
+    }
 }
 
-class TestApplication : Application() {
+class TestApplication : AppApplication() {
     override fun onCreate() {
         super.onCreate()
-        
+        appComponent1 = DaggerTestAppComponent.factory().create(this)
     }
 }

@@ -10,7 +10,7 @@ import javax.inject.Scope
 @kotlin.annotation.Retention
 annotation class PerFragment
 
-//@PerFragment
+@PerFragment
 @Component(dependencies = [AppComponent::class], modules = [BlogModule::class])
 interface BlogComponent {
     fun inject(blogFragment: BlogFragment)

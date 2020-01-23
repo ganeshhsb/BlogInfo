@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.markata.ganesh_hs.R
+import com.markata.ganesh_hs.common.AppApplication
+import com.markata.ganesh_hs.common.INetworkChecker
+import com.markata.ganesh_hs.common.NetworkChecker
 import com.markata.ganesh_hs.common.state.Loadable
 import com.markata.ganesh_hs.common.state.ViewState
 import com.markata.ganesh_hs.common.viewModelProvider
@@ -21,6 +24,9 @@ import javax.inject.Inject
 class BlogFragment : Fragment(), Loadable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var networkChecker: INetworkChecker
     private lateinit var model: BlogFragmentViewModel //  by viewModel()
     // private val networkChecker: INetworkChecker by inject()
     override fun onCreateView(
@@ -34,16 +40,15 @@ class BlogFragment : Fragment(), Loadable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-//        DaggerAppComponent.factory().create(this.context as Context).inject(this)
-//        DaggerAppComponent.builder().appModule(AppModule(this.context!!)).build()
-        val appComponent = DaggerAppComponent.factory().create(this.context!!)
+
+        val appComponent = (activity?.applicationContext as AppApplication).getAppComponent()
         DaggerBlogComponent.builder().appComponent(appComponent).build().inject(this)
         model = viewModelProvider(viewModelFactory)
         fetchBlogInfoIfDeviceOnline()
     }
 
     private fun fetchBlogInfoIfDeviceOnline() {
-        if (true) {//(networkChecker.isDeviceOnline(this.context)) {
+        if (networkChecker.isDeviceOnline(this.context)) {
             setState(this.context, ViewState.LOADING)
             fetchBlogInfo()
         } else {

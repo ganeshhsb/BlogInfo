@@ -17,7 +17,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import javax.inject.Inject
 
-//@PerFragment
+@PerFragment
 class BlogFragmentViewModel @Inject constructor(private val blogTask: IBlogTask) : ViewModel(),
     KoinComponent {
     private var _blog10thCharLiveData: MutableLiveData<Result<Char>> = MutableLiveData()

@@ -1,17 +1,18 @@
-package com.markata.ganesh_hs.di.dagger
+package com.markata.ganesh_hs.ui.blog.di
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.markata.ganesh_hs.common.AppApplication
 import com.markata.ganesh_hs.common.INetworkChecker
 import com.markata.ganesh_hs.common.NetworkChecker
-import com.markata.ganesh_hs.ui.blog.BlogFragmentViewModel
-import dagger.Binds
+import com.markata.ganesh_hs.common.RestfulAPIClient
+import com.markata.ganesh_hs.data.blog.repo.Blog
+import com.markata.ganesh_hs.data.blog.repo.IBlogRepository
+import com.markata.ganesh_hs.di.dagger.AppModule
 import dagger.MapKey
 import dagger.Module
 import dagger.Provides
-import dagger.multibindings.IntoMap
+import io.reactivex.Single
 import kotlin.reflect.KClass
 
 /**
@@ -31,7 +32,7 @@ import kotlin.reflect.KClass
 annotation class ViewModelKey(val value: KClass<out ViewModel>)
 
 @Module
-class AppModule {
+class TestAppModule {
 
     @Provides
     fun provideApplication(context: Context): AppApplication {
@@ -41,5 +42,20 @@ class AppModule {
     @Provides
     fun provideNetworkChecker(): INetworkChecker {
         return NetworkChecker()
+    }
+
+    @Provides
+    fun provideRestfulAPIClient(): RestfulAPIClient {
+        return object : RestfulAPIClient {
+            override fun fetchBlog(): Single<String> {
+                val tenthChar = ' '
+                val templateString = "qwertyuio$tenthChar"
+                var content = ""
+                for (i in 1..5) {
+                    content += templateString
+                }
+                return Single.just(content)
+            }
+        }
     }
 }

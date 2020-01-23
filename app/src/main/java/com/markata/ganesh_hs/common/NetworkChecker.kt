@@ -2,12 +2,13 @@ package com.markata.ganesh_hs.common
 
 import android.content.Context
 import android.net.ConnectivityManager
+import javax.inject.Inject
 
 interface INetworkChecker {
     fun isDeviceOnline(context: Context?): Boolean
 }
 
-class NetworkChecker : INetworkChecker {
+class NetworkChecker @Inject constructor(): INetworkChecker {
     private val TAG = "NetworkChecker"
 
     override fun isDeviceOnline(context: Context?): Boolean {

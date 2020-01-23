@@ -10,6 +10,7 @@ import com.markata.ganesh_hs.helpers.lazyActivityScenarioRule
 import com.markata.ganesh_hs.common.offlineNetworkChecker
 import com.markata.ganesh_hs.common.onlineNetworkChecker
 import com.markata.ganesh_hs.di.dagger.DaggerAppComponent
+import com.markata.ganesh_hs.ui.blog.BlogFragment
 import com.markata.ganesh_hs.ui.blog.di.*
 import org.junit.After
 import org.junit.Before
@@ -28,7 +29,7 @@ class BlogActivityTest {
 
     @Before
     fun setUp() {
-//        DaggerBlogComponent.builder().appComponent().build()
+        //DaggerBlogComponent.builder().appComponent().build()
     }
 
 
@@ -66,10 +67,11 @@ class BlogActivityTest {
 
     @Test
     fun testBlogInfoWhenOffline() {
-//        unloadKoinModules(onlineNetworkChecker)
-//        unloadKoinModules(offlineNetworkChecker)
-//        loadKoinModules(offlineNetworkChecker)
         rule.launch()
+        rule.getScenario().onActivity {
+            val blogFragment =it.supportFragmentManager.findFragmentById(R.id.main_fragment) as BlogFragment
+            blogFragment.networkChecker = offlineNetworkChecker
+        }
         onView(withId(R.id.network_error_title)).check(matches(isDisplayed()))
     }
 }

@@ -13,7 +13,7 @@ interface IBlogRepository {
     fun fetchBlog(): Single<Blog>
 }
 
-//@PerFragment
+@PerFragment
 class BlogRepository @Inject constructor(private val restfulAPIClient: RestfulAPIClient) : IBlogRepository {
 
     override fun fetchBlog(): Single<Blog> {
