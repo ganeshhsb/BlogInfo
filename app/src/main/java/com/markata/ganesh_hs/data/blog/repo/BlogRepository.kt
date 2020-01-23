@@ -1,6 +1,7 @@
 package com.markata.ganesh_hs.data.blog.repo
 
 import com.markata.ganesh_hs.common.RestfulAPIClient
+import com.markata.ganesh_hs.ui.blog.di.PerFragment
 import io.reactivex.Single
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -12,7 +13,7 @@ interface IBlogRepository {
     fun fetchBlog(): Single<Blog>
 }
 
-@Singleton
+//@PerFragment
 class BlogRepository @Inject constructor(private val restfulAPIClient: RestfulAPIClient) : IBlogRepository {
 
     override fun fetchBlog(): Single<Blog> {

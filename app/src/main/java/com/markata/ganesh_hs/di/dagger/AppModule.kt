@@ -1,25 +1,15 @@
 package com.markata.ganesh_hs.di.dagger
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.markata.ganesh_hs.BlogActivity
-import com.markata.ganesh_hs.common.RestfulAPIClient
-import com.markata.ganesh_hs.data.blog.repo.BlogRepository
-import com.markata.ganesh_hs.data.blog.repo.IBlogRepository
-import com.markata.ganesh_hs.domain.blog.BlogTask
-import com.markata.ganesh_hs.domain.blog.IBlogTask
-import com.markata.ganesh_hs.ui.blog.BlogFragment
+import com.markata.ganesh_hs.common.AppApplication
 import com.markata.ganesh_hs.ui.blog.BlogFragmentViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
 import dagger.Provides
-import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.IntoMap
-import java.lang.annotation.Documented
-import java.lang.annotation.Retention
-import java.lang.annotation.RetentionPolicy
-import javax.inject.Scope
 import kotlin.reflect.KClass
 
 /**
@@ -40,56 +30,9 @@ annotation class ViewModelKey(val value: KClass<out ViewModel>)
 
 @Module
 class AppModule {
-//    @Provides
-//    fun provideContext(application: AppApplication): Context {
-//        return application.applicationContext
-//    }
-}
 
-
-@Module
-interface ActivityModule {
-
-    @ContributesAndroidInjector(modules = [BlogActivityModule::class])
-    fun provideBlogActivity(): BlogActivity
-
-//    @Binds
-//    fun provideBlogTask(blogTask: BlogTask): IBlogTask
-
-//    @Binds
-//    fun provideBlogRepository(blogTask: BlogRepository): IBlogRepository
-}
-
-@Module
-interface BlogActivityModule {
-    @FragmentScoped
-    @ContributesAndroidInjector
-    fun provideBlogFragment(): BlogFragment
-
-    /**
-     * The ViewModels are created by Dagger in a map. Via the @ViewModelKey, we define that we
-     * want to get a [OnboardingViewModel] class.
-     */
-    @Binds
-    @IntoMap
-    @ViewModelKey(BlogFragmentViewModel::class)
-    fun bindOnboardingViewModel(viewModel: BlogFragmentViewModel): ViewModel
-
-}
-
-@Module
-@Suppress("UNUSED")
-interface ViewModelModule {
-
-    @Binds
-    fun bindViewModelFactory(factory: AppViewModelFactory):
-            ViewModelProvider.Factory
-}
-
-@Module
-class RepoModule {
-//    @Provides
-//    fun provideRepo(restfulAPIClient: RestfulAPIClient): IBlogRepository {
-//        return BlogRepository(restfulAPIClient)
-//    }
+    @Provides
+    fun provideApplication(context: Context): AppApplication {
+        return context as AppApplication
+    }
 }

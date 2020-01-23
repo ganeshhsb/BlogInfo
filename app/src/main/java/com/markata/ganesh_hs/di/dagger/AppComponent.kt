@@ -1,25 +1,26 @@
 package com.markata.ganesh_hs.di.dagger
 
 import android.content.Context
-import com.markata.ganesh_hs.common.AppApplication
+import androidx.lifecycle.ViewModelProvider
+import com.markata.ganesh_hs.BlogActivity
+import com.markata.ganesh_hs.common.RestfulAPIClient
+import com.markata.ganesh_hs.ui.blog.BlogFragment
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjector
-import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
-
 
 // restful ->Repo-> task ->viewmodel
 @Singleton
-@Component(modules = [NetworkModule::class,
-    RepoModule::class,
-    AndroidSupportInjectionModule::class,
-    AppModule::class,
-    ActivityModule::class,
-    ViewModelModule::class])
-interface AppComponent : AndroidInjector<AppApplication> {
+@Component(
+    modules = [NetworkModule::class,
+        AppModule::class
+    ]
+)
+interface AppComponent {
     @Component.Factory
-    interface Factory {
-        fun create(@BindsInstance appApplicationContext: Context): AppComponent
+    interface AppComponentFactory {
+        fun create(@BindsInstance context: Context): AppComponent
     }
+
+    fun getRestfulAPIClient(): RestfulAPIClient
 }

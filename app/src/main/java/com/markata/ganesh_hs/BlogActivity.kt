@@ -2,9 +2,8 @@ package com.markata.ganesh_hs
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import dagger.android.support.DaggerAppCompatActivity
 
-class BlogActivity : DaggerAppCompatActivity() {
+class BlogActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -9,6 +9,8 @@ import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingRe
 import com.markata.ganesh_hs.helpers.lazyActivityScenarioRule
 import com.markata.ganesh_hs.common.offlineNetworkChecker
 import com.markata.ganesh_hs.common.onlineNetworkChecker
+import com.markata.ganesh_hs.di.dagger.DaggerAppComponent
+import com.markata.ganesh_hs.ui.blog.di.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -26,6 +28,7 @@ class BlogActivityTest {
 
     @Before
     fun setUp() {
+//        DaggerBlogComponent.builder().appComponent().build()
     }
 
 
@@ -48,10 +51,14 @@ class BlogActivityTest {
 
     @Test
     fun testBlogInfoWhenOnline() {
-        unloadKoinModules(onlineNetworkChecker)
-        unloadKoinModules(offlineNetworkChecker)
-        loadKoinModules(onlineNetworkChecker)
+//        unloadKoinModules(onlineNetworkChecker)
+//        unloadKoinModules(offlineNetworkChecker)
+//        loadKoinModules(onlineNetworkChecker)
         rule.launch()
+        rule.getScenario().onActivity {
+//            DaggerTestBlogComponent.builder().appComponent(DaggerAppComponent.factory().create(it.applicationContext))
+//                .testBlogModule(TestBlogModule()).build().inject()
+        }
         onView(withId(R.id.tenth_char)).check(matches(withText("WHITE_SPACE")))
         onView(withId(R.id.every_tenth_char)).check(matches(withText("     ")))
         onView(withId(R.id.unique_word_count)).check(matches(withText("0")))
@@ -59,9 +66,9 @@ class BlogActivityTest {
 
     @Test
     fun testBlogInfoWhenOffline() {
-        unloadKoinModules(onlineNetworkChecker)
-        unloadKoinModules(offlineNetworkChecker)
-        loadKoinModules(offlineNetworkChecker)
+//        unloadKoinModules(onlineNetworkChecker)
+//        unloadKoinModules(offlineNetworkChecker)
+//        loadKoinModules(offlineNetworkChecker)
         rule.launch()
         onView(withId(R.id.network_error_title)).check(matches(isDisplayed()))
     }

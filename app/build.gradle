@@ -4,6 +4,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+    sourceSets {
+        androidTest {
+            java.srcDirs += "src/sharedTest/java"
+        }
+        test {
+            java.srcDirs += "src/sharedTest/java"
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -119,10 +127,12 @@ dependencies {
     testImplementation "android.arch.core:core-testing:1.1.1"
 
     // dagger
-//    implementation 'com.google.dagger:dagger:2.20'
-//    implementation 'com.google.dagger:dagger:2.20'
     kapt 'com.google.dagger:dagger-compiler:2.24'
-    implementation 'com.google.dagger:dagger-android:2.24'
-    implementation 'com.google.dagger:dagger-android-support:2.24'
-    kapt 'com.google.dagger:dagger-android-processor:2.24'
+    implementation "com.google.dagger:dagger:2.24"
+
+    androidTestImplementation "com.google.dagger:dagger:2.24"
+    kaptAndroidTest 'com.google.dagger:dagger-compiler:2.24'
+
+    testImplementation "com.google.dagger:dagger:2.24"
+    kaptTest 'com.google.dagger:dagger-compiler:2.24'
 }

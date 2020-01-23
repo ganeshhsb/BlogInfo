@@ -9,6 +9,7 @@ import com.markata.ganesh_hs.common.TenthCharNotFoundException
 import com.markata.ganesh_hs.common.UniqueWordCountNotFoundException
 import com.markata.ganesh_hs.domain.blog.BlogTask
 import com.markata.ganesh_hs.domain.blog.IBlogTask
+import com.markata.ganesh_hs.ui.blog.di.PerFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
@@ -16,7 +17,9 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import javax.inject.Inject
 
-class BlogFragmentViewModel @Inject constructor(private val blogTask: BlogTask) : ViewModel(), KoinComponent {
+//@PerFragment
+class BlogFragmentViewModel @Inject constructor(private val blogTask: IBlogTask) : ViewModel(),
+    KoinComponent {
     private var _blog10thCharLiveData: MutableLiveData<Result<Char>> = MutableLiveData()
     private var _blogEvery10thCharLiveData: MutableLiveData<Result<String>> = MutableLiveData()
     private var _blogWordCount: MutableLiveData<Result<Int>> = MutableLiveData()

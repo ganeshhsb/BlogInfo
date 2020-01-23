@@ -1,5 +1,6 @@
 package com.markata.ganesh_hs.ui.blog
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,18 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.markata.ganesh_hs.R
-import com.markata.ganesh_hs.common.INetworkChecker
-import com.markata.ganesh_hs.common.NetworkChecker
 import com.markata.ganesh_hs.common.state.Loadable
 import com.markata.ganesh_hs.common.state.ViewState
 import com.markata.ganesh_hs.common.viewModelProvider
-import dagger.android.support.DaggerFragment
+import com.markata.ganesh_hs.di.dagger.AppModule
+import com.markata.ganesh_hs.di.dagger.DaggerAppComponent
+import com.markata.ganesh_hs.ui.blog.di.DaggerBlogComponent
 import kotlinx.android.synthetic.main.fragment_blog.*
-import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
 import javax.inject.Inject
 
-class BlogFragment : DaggerFragment(), Loadable {
+class BlogFragment : Fragment(), Loadable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var model: BlogFragmentViewModel //  by viewModel()
@@ -35,6 +34,10 @@ class BlogFragment : DaggerFragment(), Loadable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+//        DaggerAppComponent.factory().create(this.context as Context).inject(this)
+//        DaggerAppComponent.builder().appModule(AppModule(this.context!!)).build()
+        val appComponent = DaggerAppComponent.factory().create(this.context!!)
+        DaggerBlogComponent.builder().appComponent(appComponent).build().inject(this)
         model = viewModelProvider(viewModelFactory)
         fetchBlogInfoIfDeviceOnline()
     }
